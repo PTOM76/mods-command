@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "",
+  "authors": [
+    "Pitan"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/modscmd/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.pitan76.modscmd.fabric.ModsCommandFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": ">=1.16",
+    "mcpitanlib": "*"
+  }
+}
