@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[40,)"
-license = "MIT"
+license = "CC0-1.0"
 
 [[mods]]
 modId = "${mod_id}"
@@ -12,7 +12,7 @@ logoFile = "assets/modscmd/icon.png"
 #credits="Thanks for this example mod goes to Java"
 authors = "Pitan"
 description = '''
-
+Add command to display list of mods
 '''
 
 [[dependencies.${mod_id}]]

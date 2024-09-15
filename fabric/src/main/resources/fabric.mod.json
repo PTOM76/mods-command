@@ -3,12 +3,15 @@
   "id": "${mod_id}",
   "version": "${version}",
   "name": "${mod_name}",
-  "description": "",
+  "description": "Add command to display list of mods",
   "authors": [
     "Pitan"
   ],
-  "contact": {},
-  "license": "MIT",
+  "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/mods-command",
+    "sources": "https://github.com/PTOM76/mods-command"
+  },
+  "license": "CC0-1.0",
   "icon": "assets/modscmd/icon.png",
   "environment": "*",
   "entrypoints": {
