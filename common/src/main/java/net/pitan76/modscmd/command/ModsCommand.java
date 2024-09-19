@@ -1,7 +1,6 @@
 package net.pitan76.modscmd.command;
 
 import net.pitan76.mcpitanlib.api.command.CommandSettings;
-import net.pitan76.mcpitanlib.api.command.ConfigCommand;
 import net.pitan76.mcpitanlib.api.command.LiteralCommand;
 import net.pitan76.mcpitanlib.api.command.argument.StringCommand;
 import net.pitan76.mcpitanlib.api.event.ServerCommandEvent;
@@ -11,7 +10,9 @@ import net.pitan76.mcpitanlib.api.util.TextUtil;
 import net.pitan76.mcpitanlib.core.datafixer.Pair;
 import net.pitan76.modscmd.ModInfo;
 import net.pitan76.modscmd.ModUtil;
+import net.pitan76.modscmd.output.ModListOutput;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 public class ModsCommand extends LiteralCommand {
@@ -201,6 +202,43 @@ public class ModsCommand extends LiteralCommand {
                 sb.delete(sb.length() - 2, sb.length());
 
                 e.sendSuccess(TextUtil.literal(sb.toString()), false);
+            }
+        });
+
+        addArgumentCommand("output", new LiteralCommand() {
+
+            @Override
+            public void init(CommandSettings settings) {
+                addArgumentCommand("fileType", new StringCommand() {
+
+                    @Override
+                    public void execute(StringCommandEvent e) {
+                        String fileType = e.getValue();
+                        Calendar calendar = Calendar.getInstance();
+                        String date = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.HOUR_OF_DAY) + "-" + calendar.get(Calendar.MINUTE) + "-" + calendar.get(Calendar.SECOND);
+
+                        ModListOutput.Result result = ModListOutput.output(fileType, date);
+                        if (result == ModListOutput.Result.SUCCESS) {
+                            e.sendSuccess("[Mods Command] The mod list has been output to the file. \"(gameDir)/modlist/" + date + "." + fileType + "\"", false);
+                            return;
+                        }
+                        if (result == ModListOutput.Result.NOT_SUPPORT_FILE_TYPE) {
+                            e.sendSuccess("[Mods Command] The file type is not supported.", false);
+                            return;
+                        }
+                        e.sendFailure(TextUtil.literal("[Mods Command] Failed to output the mod list."));
+                    }
+
+                    @Override
+                    public String getArgumentName() {
+                        return "fileType";
+                    }
+                });
+            }
+
+            @Override
+            public void execute(ServerCommandEvent e) {
+                e.sendSuccess(TextUtil.literal("Usage: /mods output txt/json/yml/csv/xml/html/xlsx/md"), false);
             }
         });
     }
