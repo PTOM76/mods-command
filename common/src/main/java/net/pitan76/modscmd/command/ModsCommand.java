@@ -238,7 +238,7 @@ public class ModsCommand extends LiteralCommand {
 
             @Override
             public void execute(ServerCommandEvent e) {
-                e.sendSuccess(TextUtil.literal("Usage: /mods output txt/json/yml/csv/xml/html/xlsx/md"), false);
+                e.sendSuccess(TextUtil.literal("Usage: /mods output [txt/json/yml/csv/xml/html/xlsx/md]"), false);
             }
         });
     }

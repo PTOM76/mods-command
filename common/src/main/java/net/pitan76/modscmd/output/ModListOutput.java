@@ -38,6 +38,11 @@ public class ModListOutput {
         }
 
         File file = new File(FOLDER, fileName + "." + fileType);
+
+        if (!FOLDER.exists() && !FOLDER.mkdirs()) {
+            return Result.FAILED;
+        }
+
         if (fileType.equals("json")) {
             // JSONを出力する、modInfosをJSONに変換して出力する
             StringBuilder builder = new StringBuilder();
@@ -64,6 +69,7 @@ public class ModListOutput {
             builder.append("\n]");
 
             FileControl.fileWriteContents(file, builder.toString());
+            return Result.SUCCESS;
         }
         if (fileType.equals("csv")) {
             // CSVを出力する、modInfosをCSVに変換して出力する
@@ -86,7 +92,7 @@ public class ModListOutput {
             }
 
             FileControl.fileWriteContents(file, builder.toString());
-
+            return Result.SUCCESS;
         }
         if (fileType.equals("txt")) {
             // TXTを出力する、modInfosをTXTに変換して出力する
@@ -110,6 +116,7 @@ public class ModListOutput {
             }
 
             FileControl.fileWriteContents(file, builder.toString());
+            return Result.SUCCESS;
         }
         if (fileType.equals("md")) {
             // MDを出力する、modInfosをMDに変換して出力する
@@ -132,6 +139,7 @@ public class ModListOutput {
             }
 
             FileControl.fileWriteContents(file, builder.toString());
+            return Result.SUCCESS;
         }
         if (fileType.equals("yml")) {
             // YMLを出力する、modInfosをYMLに変換して出力する
@@ -154,6 +162,7 @@ public class ModListOutput {
             }
 
             FileControl.fileWriteContents(file, builder.toString());
+            return Result.SUCCESS;
         }
         if (fileType.equals("xml")) {
             // XMLを出力する、modInfosをXMLに変換して出力する
@@ -180,6 +189,7 @@ public class ModListOutput {
             builder.append("</modList>");
 
             FileControl.fileWriteContents(file, builder.toString());
+            return Result.SUCCESS;
         }
         if (fileType.equals("html")) {
             // HTMLを出力する、modInfosをHTMLに変換して出力する
@@ -221,6 +231,7 @@ public class ModListOutput {
             builder.append("</html>");
 
             FileControl.fileWriteContents(file, builder.toString());
+            return Result.SUCCESS;
         }
         if (fileType.equals("xlsx")) {
             // XLSXを出力する、modInfosをXLSXに変換して出力する
@@ -243,8 +254,8 @@ public class ModListOutput {
             }
 
             FileControl.fileWriteContents(file, builder.toString());
+            return Result.SUCCESS;
         }
-
 
         return Result.FAILED;
     }
